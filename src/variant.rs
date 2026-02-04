@@ -53,39 +53,39 @@ impl VariantFlag {
         VariantFlag(0)
     }
 
-    /// An argument parsed with the resulting VariantFlag will only become a [`bool`]
+    /// An argument parsed with the resulting VariantFlag will only become a [`bool`].
     /// Booleans are parsed exclusively from 'true' and 'false'.
     #[must_use]
     pub fn bool() -> VariantFlag {
         VariantFlag(1 << VariantFlag::BOOL_BIT)
     }
 
-    /// An argument parsed with the resulting VariantFlag will only become an [`i32`]
+    /// An argument parsed with the resulting VariantFlag will only become an [`i32`].
     #[must_use]
     pub fn int() -> VariantFlag {
         VariantFlag(1 << VariantFlag::INT_BIT)
     }
 
-    /// An argument parsed with the resulting VariantFlag will only become an [`f32`]
+    /// An argument parsed with the resulting VariantFlag will only become an [`f32`].
     #[must_use]
     pub fn float() -> VariantFlag {
         VariantFlag(1 << VariantFlag::FLOAT_BIT)
     }
 
-    /// An argument parsed with the resulting VariantFlag will only become an [`std::net::SocketAddr`]
+    /// An argument parsed with the resulting VariantFlag will only become an [`std::net::SocketAddr`].
     #[must_use]
     pub fn socket() -> VariantFlag {
         VariantFlag(1 << VariantFlag::SOCKET_BIT)
     }
 
-    /// An argument parsed with the resulting VariantFlag will only become an [`std::path::Path`]
+    /// An argument parsed with the resulting VariantFlag will only become an [`std::path::PathBuf`].
     /// This conversion will never fail, but that doesn't mean the path points to anything meaningful.
     #[must_use]
     pub fn path() -> VariantFlag {
         VariantFlag(1 << VariantFlag::PATH_BIT)
     }
 
-    /// An argument parsed with the resulting VariantFlag will be passed directly as a [`String`]
+    /// An argument parsed with the resulting VariantFlag will be passed directly as a [`String`].
     /// This conversion will never fail.
     #[must_use]
     pub fn string() -> VariantFlag {
@@ -133,7 +133,7 @@ impl VariantFlag {
     }
 
     /// Parse a string into one of the types this VariantFlag supports.
-    /// The precedence is bool, i32, f32, socket, path, and lastly String
+    /// The precedence is bool, i32, f32, SocketAddr, PathBuf, and lastly String
     #[must_use]
     pub fn parse(&self, raw: &str) -> Option<Variant> {
         if self.bool_allowed()

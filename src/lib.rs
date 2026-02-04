@@ -1,6 +1,6 @@
 //! A tool for sorting and parsing command line arguments!
 //!
-//! [`gather_command_line_flags`] is your entry point. See also [`FlagDefinitions`], [`Variant`], and [`Args`].
+//! [`gather_command_line_flags`] is your entry point. See also [`FlagDefinition`], [`Variant`], and [`Args`].
 
 mod args;
 mod variant;

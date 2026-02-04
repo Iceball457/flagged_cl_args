@@ -5,6 +5,8 @@ use std::{
     str::FromStr,
 };
 
+use crate::ArgumentError;
+
 /// Variant flag determines what types an argument is allowed to become!
 /// If the argument can become a string, parsing it will never fail, but it will only become a string if it can't become any of the other types it is allowed to.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
@@ -60,10 +62,24 @@ impl VariantFlag {
         VariantFlag(1 << VariantFlag::BOOL_BIT)
     }
 
+    /// Adds [`bool`] to the list of types an argument can support.
+    /// Supports method chaining.
+    #[must_use]
+    pub fn or_bool(self) -> VariantFlag {
+        VariantFlag(1 << VariantFlag::BOOL_BIT | self.0)
+    }
+
     /// An argument parsed with the resulting VariantFlag will only become an [`i32`].
     #[must_use]
     pub fn int() -> VariantFlag {
         VariantFlag(1 << VariantFlag::INT_BIT)
+    }
+
+    /// Adds [`i32`] to the list of types an argument can support.
+    /// Supports method chaining.
+    #[must_use]
+    pub fn or_int(self) -> VariantFlag {
+        VariantFlag(1 << VariantFlag::INT_BIT | self.0)
     }
 
     /// An argument parsed with the resulting VariantFlag will only become an [`f32`].
@@ -78,6 +94,13 @@ impl VariantFlag {
         VariantFlag(1 << VariantFlag::SOCKET_BIT)
     }
 
+    /// Adds [`std::net::SocketAddr`] to the list of types an argument can support.
+    /// Supports method chaining.
+    #[must_use]
+    pub fn or_socket(self) -> VariantFlag {
+        VariantFlag(1 << VariantFlag::SOCKET_BIT | self.0)
+    }
+
     /// An argument parsed with the resulting VariantFlag will only become an [`std::path::PathBuf`].
     /// This conversion will never fail, but that doesn't mean the path points to anything meaningful.
     #[must_use]
@@ -85,11 +108,25 @@ impl VariantFlag {
         VariantFlag(1 << VariantFlag::PATH_BIT)
     }
 
+    /// Adds [`std::path::Path`] to the list of types an argument can support.
+    /// Supports method chaining.
+    #[must_use]
+    pub fn or_path(self) -> VariantFlag {
+        VariantFlag(1 << VariantFlag::PATH_BIT | self.0)
+    }
+
     /// An argument parsed with the resulting VariantFlag will be passed directly as a [`String`].
     /// This conversion will never fail.
     #[must_use]
     pub fn string() -> VariantFlag {
         VariantFlag(1 << VariantFlag::STRING_BIT)
+    }
+
+    /// Adds [`String`] to the list of types an argument can support.
+    /// Supports method chaining.
+    #[must_use]
+    pub fn or_string(self) -> VariantFlag {
+        VariantFlag(1 << VariantFlag::STRING_BIT | self.0)
     }
 
     #[must_use]

@@ -249,6 +249,78 @@ impl Variant {
             lhs.0.cmp(&rhs.0)
         }
     }
+
+    /// Maps from Variant to Option\<bool\>
+    pub fn as_bool(&self) -> Option<bool> {
+        if let Variant::Bool(b) = self {
+            Some(*b)
+        } else {
+            None
+        }
+    }
+
+    /// Maps from Variant to Option\<i32\>
+    pub fn as_int(&self) -> Option<i32> {
+        if let Variant::Int(i) = self {
+            Some(*i)
+        } else {
+            None
+        }
+    }
+
+    /// Maps from Variant to Option\<f32\>
+    pub fn as_float(&self) -> Option<f32> {
+        if let Variant::Float(f) = self {
+            Some(*f)
+        } else {
+            None
+        }
+    }
+
+    /// Maps from Variant to Option\<SocketAddr\>
+    pub fn as_socket(&self) -> Option<SocketAddr> {
+        if let Variant::Socket(s) = self {
+            Some(*s)
+        } else {
+            None
+        }
+    }
+
+    /// Maps from Variant to Option\<&PathBuf\>
+    pub fn as_path(&self) -> Option<&PathBuf> {
+        if let Variant::Path(p) = self {
+            Some(p)
+        } else {
+            None
+        }
+    }
+
+    /// Maps from Variant to Option\<Pathbuf\>
+    pub fn into_path(self) -> Option<PathBuf> {
+        if let Variant::Path(p) = self {
+            Some(p)
+        } else {
+            None
+        }
+    }
+
+    /// Maps from Variant to Option\<&str\>
+    pub fn as_string(&self) -> Option<&str> {
+        if let Variant::String(s) = self {
+            Some(s)
+        } else {
+            None
+        }
+    }
+
+    /// Maps from Variant to Option\<String\>
+    pub fn into_string(self) -> Option<String> {
+        if let Variant::String(s) = self {
+            Some(s)
+        } else {
+            None
+        }
+    }
 }
 
 impl Display for Variant {

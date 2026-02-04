@@ -7,6 +7,7 @@ use std::{
 
 /// Variant flag determines what types an argument is allowed to become!
 /// If the argument can become a string, parsing it will never fail, but it will only become a string if it can't become any of the other types it is allowed to.
+#[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]
 pub struct VariantFlag(u8);
 
 impl VariantFlag {
@@ -163,7 +164,7 @@ impl VariantFlag {
 }
 
 /// A value of a particular type.
-#[derive(Debug, PartialEq)]
+#[derive(Debug, PartialEq, PartialOrd, Clone)]
 pub enum Variant {
     /// Booleans are represented as [`bool`]
     Bool(bool),
@@ -211,6 +212,19 @@ impl Variant {
             }
         } else {
             lhs.0.cmp(&rhs.0)
+        }
+    }
+}
+
+impl Display for Variant {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            Variant::Bool(inner) => inner.fmt(f),
+            Variant::Int(inner) => inner.fmt(f),
+            Variant::Float(inner) => inner.fmt(f),
+            Variant::Socket(inner) => inner.fmt(f),
+            Variant::Path(inner) => inner.to_string_lossy().fmt(f),
+            Variant::String(inner) => inner.fmt(f),
         }
     }
 }

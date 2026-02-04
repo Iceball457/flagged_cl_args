@@ -2,6 +2,11 @@
 name = "flagged_cl_args"
 version = "0.1.0"
 edition = "2024"
+description = "Command line argument parsing"
+categories = ["command-line-interface", "data-structures"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/Iceball457/flagged_cl_args"
+readme = "README.md"
 
 [dependencies]
 

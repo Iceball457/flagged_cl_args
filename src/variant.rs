@@ -5,8 +5,6 @@ use std::{
     str::FromStr,
 };
 
-use crate::ArgumentError;
-
 /// Variant flag determines what types an argument is allowed to become!
 /// If the argument can become a string, parsing it will never fail, but it will only become a string if it can't become any of the other types it is allowed to.
 #[derive(Clone, Copy, PartialEq, Eq, Hash, Debug)]

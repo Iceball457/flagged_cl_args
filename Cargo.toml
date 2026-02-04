@@ -1,6 +1,6 @@
 [package]
 name = "flagged_cl_args"
-version = "1.0.0"
+version = "1.1.0"
 edition = "2024"
 description = "Command line argument parsing"
 categories = ["command-line-interface", "data-structures"]
